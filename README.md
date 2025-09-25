@@ -14,6 +14,42 @@ Devlink은 로컬 개발 환경에서 `*.localhost` 도메인을 대상으로 �
 - `fsnotify`를 사용해 구성 파일 변경을 감지하고 실시간으로 라우트를 갱신합니다.
 
 ### 설치
+#### 릴리스 바이너리 다운로드
+아래 명령에서 `YOUR_GITHUB_OWNER` 부분을 실제 GitHub 소유자(개인 계정 또는 조직) 이름으로 바꿔 사용하세요. 최신 릴리스는 `https://github.com/YOUR_GITHUB_OWNER/local-ssl/releases/latest`에서 확인할 수 있습니다.
+
+##### Linux (amd64)
+```bash
+curl -L "https://github.com/YOUR_GITHUB_OWNER/local-ssl/releases/latest/download/devlink-linux-amd64.tar.gz" -o devlink-linux-amd64.tar.gz
+tar -xzf devlink-linux-amd64.tar.gz
+sudo install -m 0755 devlink-linux-amd64/devlink /usr/local/bin/devlink
+```
+
+##### macOS (amd64/Intel)
+```bash
+curl -L "https://github.com/YOUR_GITHUB_OWNER/local-ssl/releases/latest/download/devlink-darwin-amd64.tar.gz" -o devlink-darwin-amd64.tar.gz
+tar -xzf devlink-darwin-amd64.tar.gz
+sudo install -m 0755 devlink-darwin-amd64/devlink /usr/local/bin/devlink
+```
+
+##### macOS (arm64/Apple Silicon)
+```bash
+curl -L "https://github.com/YOUR_GITHUB_OWNER/local-ssl/releases/latest/download/devlink-darwin-arm64.tar.gz" -o devlink-darwin-arm64.tar.gz
+tar -xzf devlink-darwin-arm64.tar.gz
+sudo install -m 0755 devlink-darwin-arm64/devlink /usr/local/bin/devlink
+```
+
+##### Windows (amd64)
+PowerShell(관리자)에서 실행합니다. 원하는 설치 경로(예: `C:\Tools\devlink`)를 미리 만들어 두고 `Move-Item`에서 해당 경로를 지정하세요.
+```powershell
+Invoke-WebRequest -Uri "https://github.com/YOUR_GITHUB_OWNER/local-ssl/releases/latest/download/devlink-windows-amd64.zip" -OutFile devlink-windows-amd64.zip
+Expand-Archive -Path devlink-windows-amd64.zip -DestinationPath .
+Move-Item -Path .\devlink-windows-amd64\devlink.exe -Destination "C:\\Tools\\devlink\\devlink.exe" -Force
+setx PATH "$Env:PATH;C:\\Tools\\devlink"
+```
+
+PATH에 반영된 뒤에는 새로운 터미널을 열고 `devlink --help`로 설치를 확인할 수 있습니다.
+
+#### 수동 빌드
 ```bash
 # 바이너리 빌드
 make build  # 또는 go build ./cmd/devlink
@@ -92,6 +128,42 @@ Devlink is a zero-config HTTPS gateway for local development that delivers produ
 - Live reload of configuration through `fsnotify`.
 
 ### Installation
+#### Download prebuilt release assets
+Replace `YOUR_GITHUB_OWNER` with the actual GitHub owner (user or organization) for this repository. The latest release is available at `https://github.com/YOUR_GITHUB_OWNER/local-ssl/releases/latest`.
+
+##### Linux (amd64)
+```bash
+curl -L "https://github.com/YOUR_GITHUB_OWNER/local-ssl/releases/latest/download/devlink-linux-amd64.tar.gz" -o devlink-linux-amd64.tar.gz
+tar -xzf devlink-linux-amd64.tar.gz
+sudo install -m 0755 devlink-linux-amd64/devlink /usr/local/bin/devlink
+```
+
+##### macOS (amd64/Intel)
+```bash
+curl -L "https://github.com/YOUR_GITHUB_OWNER/local-ssl/releases/latest/download/devlink-darwin-amd64.tar.gz" -o devlink-darwin-amd64.tar.gz
+tar -xzf devlink-darwin-amd64.tar.gz
+sudo install -m 0755 devlink-darwin-amd64/devlink /usr/local/bin/devlink
+```
+
+##### macOS (arm64/Apple Silicon)
+```bash
+curl -L "https://github.com/YOUR_GITHUB_OWNER/local-ssl/releases/latest/download/devlink-darwin-arm64.tar.gz" -o devlink-darwin-arm64.tar.gz
+tar -xzf devlink-darwin-arm64.tar.gz
+sudo install -m 0755 devlink-darwin-arm64/devlink /usr/local/bin/devlink
+```
+
+##### Windows (amd64)
+Run the following in an elevated PowerShell session. Create your preferred install directory first (e.g., `C:\Tools\devlink`) and update `Move-Item` accordingly.
+```powershell
+Invoke-WebRequest -Uri "https://github.com/YOUR_GITHUB_OWNER/local-ssl/releases/latest/download/devlink-windows-amd64.zip" -OutFile devlink-windows-amd64.zip
+Expand-Archive -Path devlink-windows-amd64.zip -DestinationPath .
+Move-Item -Path .\devlink-windows-amd64\devlink.exe -Destination "C:\\Tools\\devlink\\devlink.exe" -Force
+setx PATH "$Env:PATH;C:\\Tools\\devlink"
+```
+
+After the PATH update, open a new terminal and run `devlink --help` to verify the installation.
+
+#### Build from source
 ```bash
 # Build the binary
 make build  # or go build ./cmd/devlink
