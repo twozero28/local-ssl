@@ -14,6 +14,9 @@ Devlink은 로컬 개발 환경에서 `*.localhost` 도메인을 대상으로 �
 - `fsnotify`를 사용해 구성 파일 변경을 감지하고 실시간으로 라우트를 갱신합니다.
 
 ### 설치
+1. GitHub Releases 페이지에서 운영체제에 맞는 압축 파일을 내려받습니다. 릴리스에는 각 파일의 무결성을 확인할 수 있는 `.sha256` 체크섬이 함께 올라갑니다. Linux에서는 `sha256sum -c <파일명>.sha256`, macOS에서는 `shasum -a 256 -c <파일명>.sha256`으로 검증하고, Windows PowerShell에서는 `Get-FileHash .\<파일명>.zip -Algorithm SHA256` 출력이 `.sha256` 파일에 기록된 해시와 일치해야 합니다. 압축을 해제한 뒤 생성된 `devlink` 바이너리를 `$PATH` 어딘가에 배치하면 됩니다.
+
+2. 소스에서 직접 빌드하려면 다음 명령을 실행합니다.
 ```bash
 # 바이너리 빌드
 make build  # 또는 go build ./cmd/devlink
@@ -92,6 +95,9 @@ Devlink is a zero-config HTTPS gateway for local development that delivers produ
 - Live reload of configuration through `fsnotify`.
 
 ### Installation
+1. Download the archive that matches your operating system from the GitHub Releases page. Each release ships with companion `.sha256` checksum files. On Linux run `sha256sum -c <filename>.sha256`, on macOS run `shasum -a 256 -c <filename>.sha256`, and in Windows PowerShell verify that `Get-FileHash .\<filename>.zip -Algorithm SHA256` matches the hash stored in the checksum file. After extracting the archive, place the `devlink` binary somewhere on your `$PATH`.
+
+2. To build from source instead, run the following:
 ```bash
 # Build the binary
 make build  # or go build ./cmd/devlink
